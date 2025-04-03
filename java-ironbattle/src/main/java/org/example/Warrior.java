@@ -29,7 +29,7 @@ public class Warrior extends Character implements Attacker {
 
     public void setStrength(int strength) {
         if(strength > 10){
-            System.out.println("La stamina no puede superar 10");
+            System.out.println("La fuerza no puede superar 10");
         } else {
         this.strength = strength;
         }
