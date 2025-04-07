@@ -21,9 +21,11 @@ public class Warrior extends Character implements Attacker {
 
     public void setStamina(int stamina) {
         if(stamina > 50){
-            System.out.println("La stamina no puede superar 50");
+            System.out.println("La stamina no puede superar 50, recibirá 25");
+            this.stamina = 25;
         } else if (stamina <= 0) {
-            System.out.println("La stamina no puede ser menor que 1");
+            System.out.println("La stamina no puede ser menor que 1, recibirá 25");
+            this.stamina = 25;
         } else {
             this.stamina = stamina;
         }
@@ -31,9 +33,11 @@ public class Warrior extends Character implements Attacker {
 
     public void setStrength(int strength) {
         if(strength > 10){
-            System.out.println("La fuerza no puede superar 10");
+            System.out.println("La fuerza no puede superar 10, recibirá 5");
+            this.strength = 5;
         }else if (strength <= 0) {
-            System.out.println("La fuerza no puede ser menor que 1");
+            System.out.println("La fuerza no puede ser menor que 1, recibirá 5");
+            this.strength = 5;
         } else {
         this.strength = strength;
         }
@@ -63,7 +67,7 @@ public class Warrior extends Character implements Attacker {
             // sale weak Attack
             damage = strength / 2;
             stamina += 1;
-            System.out.println(getName() + "hace un WEAK ATTACK!");
+            System.out.println(getName() + "hace un weak attack!");
         } else {
             // No queda stamina
             stamina += 2;
