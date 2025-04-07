@@ -14,17 +14,20 @@ public class Wizard extends Character implements Attacker {
 
     public Wizard(String name, int hp, int mana, int intelligence) {
         super(name, hp);
-        setMana(mana);
-        setIntelligence(intelligence);
-    }
-
-
-    @Override
-    public void setHp(int hp) {
         if (hp < 50 || hp > 100) {
             System.out.println("Error la vida está fuera de rango: 50 - 100");
         } else {
-            super.setHp(hp);
+            setHp(hp);
+        }
+        if (mana < 1 || mana > 50) {
+            System.out.println("Error mana range must be 1 - 50");
+        } else {
+            setMana(mana);
+        }
+        if (intelligence < 1 || intelligence > 10) {
+            System.out.println("Error mana range must be 1 - 10");
+        } else {
+            setIntelligence(intelligence);
         }
     }
 
@@ -33,11 +36,7 @@ public class Wizard extends Character implements Attacker {
     }
 
     public void setMana(int mana) {
-        if (mana < 1 || mana > 50) {
-            System.out.println("Error mana range must be 1 - 50");
-        } else {
-            this.mana = mana;
-        }
+        this.mana = mana;
     }
 
     public int getIntelligence() {
@@ -45,11 +44,7 @@ public class Wizard extends Character implements Attacker {
     }
 
     public void setIntelligence(int intelligence) {
-        if (intelligence < 1 || intelligence > 10) {
-            System.out.println("Error mana range must be 1 - 10");
-        } else {
-            this.intelligence = intelligence;
-        }
+        this.intelligence = intelligence;
     }
 
     @Override
@@ -69,7 +64,7 @@ public class Wizard extends Character implements Attacker {
                 break;
         }
 
-        if(target.getHp() <= 0){
+        if (target.getHp() <= 0) {
             target.setAlive(false);
             System.out.println(target.getName() + " ha muerto");
         }
