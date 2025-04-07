@@ -16,16 +16,19 @@ public class Wizard extends Character implements Attacker {
         super(name, hp);
         if (hp < 50 || hp > 100) {
             System.out.println("Error la vida está fuera de rango: 50 - 100");
+            setHp(50);
         } else {
             setHp(hp);
         }
         if (mana < 1 || mana > 50) {
             System.out.println("Error mana range must be 1 - 50");
+            setMana(25);
         } else {
             setMana(mana);
         }
         if (intelligence < 1 || intelligence > 10) {
             System.out.println("Error mana range must be 1 - 10");
+            setIntelligence(5);
         } else {
             setIntelligence(intelligence);
         }
