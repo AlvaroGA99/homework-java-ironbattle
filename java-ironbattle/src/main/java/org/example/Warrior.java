@@ -73,7 +73,10 @@ public class Warrior extends Character implements Attacker {
         // Quitar la vida
         int newHp = character.getHp() - damage;
         character.setHp(newHp);
-
+        if(character.getHp() <= 0){
+            character.setAlive(false);
+            System.out.println(character.getName() + " ha muerto");
+        }
         System.out.println(getName() + " hace " + damage + " puntos de daño a " + character.getName() +
                 ". A" + character.getName() + " le quedan " + character.getHp() + " puntos de HP.");
     }
