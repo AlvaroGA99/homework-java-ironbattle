@@ -22,14 +22,18 @@ public class Warrior extends Character implements Attacker {
     public void setStamina(int stamina) {
         if(stamina > 50){
             System.out.println("La stamina no puede superar 50");
+        } else if (stamina <= 0) {
+            System.out.println("La stamina no puede ser menor que 1");
         } else {
-        this.stamina = stamina;
+            this.stamina = stamina;
         }
     }
 
     public void setStrength(int strength) {
         if(strength > 10){
             System.out.println("La fuerza no puede superar 10");
+        }else if (strength <= 0) {
+            System.out.println("La fuerza no puede ser menor que 1");
         } else {
         this.strength = strength;
         }
