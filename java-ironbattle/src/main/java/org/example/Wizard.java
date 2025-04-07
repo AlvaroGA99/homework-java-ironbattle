@@ -68,6 +68,11 @@ public class Wizard extends Character implements Attacker {
                 staffHitAttack(target);
                 break;
         }
+
+        if(target.getHp() <= 0){
+            target.setAlive(false);
+            System.out.println(target.getName() + " ha muerto");
+        }
     }
 
     private void fireballAttack(Character target) {
