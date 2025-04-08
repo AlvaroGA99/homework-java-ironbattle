@@ -1,5 +1,6 @@
 package org.example;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Warrior extends Character implements Attacker {
     private int stamina;
@@ -7,8 +8,22 @@ public class Warrior extends Character implements Attacker {
 
     public Warrior(String name, int hp, int stamina, int strength) {
         super(name, hp);
-        setStamina(stamina);
+        if(stamina > 50){
+            System.out.println("La stamina no puede superar 50, recibirá 25");
+            this.stamina = 25;
+        } else if (stamina <= 0) {
+            System.out.println("La stamina no puede ser menor que 1, recibirá 25");
+            this.stamina = 25;
+        } else {
+            this.stamina = stamina;
+        };
         setStrength(strength);
+    }
+
+    public Warrior(String name) {
+        super(name, ThreadLocalRandom.current().nextInt(100, 201));
+        this.stamina = ThreadLocalRandom.current().nextInt(10, 51);
+        this.strength = ThreadLocalRandom.current().nextInt(1, 11);
     }
 
     public int getStamina() {
@@ -19,16 +34,8 @@ public class Warrior extends Character implements Attacker {
         return strength;
     }
 
-    public void setStamina(int stamina) {
-        if(stamina > 50){
-            System.out.println("La stamina no puede superar 50, recibirá 25");
-            this.stamina = 25;
-        } else if (stamina <= 0) {
-            System.out.println("La stamina no puede ser menor que 1, recibirá 25");
-            this.stamina = 25;
-        } else {
-            this.stamina = stamina;
-        }
+    public void setStamina(int stamina){
+        this.stamina=stamina;
     }
 
     public void setStrength(int strength) {
@@ -43,17 +50,8 @@ public class Warrior extends Character implements Attacker {
         }
     }
 
-    /*    // Setters
-        public void setStamina() {
-            this.stamina = ThreadLocalRandom.current().nextInt(10, 51);
-        }
-
-        public void setStrength() {
-            this.strength = ThreadLocalRandom.current().nextInt(1, 11);
-        }
-    */
     @Override
-    public void attack(Character character) {
+    public void attack(Character target) {
         Random random = new Random();
         boolean heavyAttack = random.nextBoolean(); // devuelve true o false random
         int damage = 0;
@@ -67,7 +65,7 @@ public class Warrior extends Character implements Attacker {
             // sale weak Attack
             damage = strength / 2;
             stamina += 1;
-            System.out.println(getName() + "hace un weak attack!");
+            System.out.println(getName() + " hace un weak attack!");
         } else {
             // No queda stamina
             stamina += 2;
@@ -75,14 +73,14 @@ public class Warrior extends Character implements Attacker {
         }
 
         // Quitar la vida
-        int newHp = character.getHp() - damage;
-        character.setHp(newHp);
-        if(character.getHp() <= 0){
-            character.setAlive(false);
-            System.out.println(character.getName() + " ha muerto");
+        int newHp = target.getHp() - damage;
+        target.setHp(newHp);
+        if(target.getHp() <= 0){
+            target.setAlive(false);
+            System.out.println(target.getName() + " ha muerto");
         }
-        System.out.println(getName() + " hace " + damage + " puntos de daño a " + character.getName() +
-                ". A" + character.getName() + " le quedan " + character.getHp() + " puntos de HP.");
+        System.out.println(getName() + " hace " + damage + " puntos de daño a " + target.getName() +
+                ". A " + target.getName() + " le quedan " + target.getHp() + " puntos de HP.");
     }
 
 }
