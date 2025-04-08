@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -148,6 +149,25 @@ public class Main {
                                 System.out.println("El ganador es: " + winner.getName());
                                 break;
                             case 2:
+                                Random random = new Random();
+                                Character attacker1 = null;
+                                Character attacker2 = null;
+                                if(random.nextBoolean()){
+                                     attacker1 = new Wizard("Wizard");
+                                    attacker1.setName(attacker1.getName()+attacker1.getId());
+                                }else{
+                                    attacker1 = new Warrior("Warrior");
+                                    attacker1.setName(attacker1.getName()+attacker1.getId());
+                                }
+                                if(random.nextBoolean()){
+                                    attacker2 = new Wizard("Wizard");
+                                    attacker2.setName(attacker2.getName()+attacker2.getId());
+                                }else{
+                                    attacker2 = new Warrior("Warrior");
+                                    attacker2.setName(attacker2.getName()+attacker2.getId());
+                                }
+                                Character winnerrandom = startBattle((Attacker) attacker1,(Attacker) attacker2);
+                                System.out.println("El ganador es: " + winnerrandom.getName());
                                 validOption = true;
                                 break;
                             case 3:
