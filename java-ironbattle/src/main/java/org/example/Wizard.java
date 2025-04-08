@@ -21,13 +21,13 @@ public class Wizard extends Character implements Attacker {
             setHp(hp);
         }
         if (mana < 1 || mana > 50) {
-            System.out.println("Error mana range must be 1 - 50");
+            System.out.println("Error mana fuera de rango: 1 - 50");
             setMana(25);
         } else {
             setMana(mana);
         }
         if (intelligence < 1 || intelligence > 10) {
-            System.out.println("Error mana range must be 1 - 10");
+            System.out.println("Error inteligencia fuera de rango: 1 - 10");
             setIntelligence(5);
         } else {
             setIntelligence(intelligence);
@@ -52,17 +52,17 @@ public class Wizard extends Character implements Attacker {
 
     @Override
     public void attack(Character target) {
-        String[] attacks = {"Fireball", "Staff hit"};
+        String[] attacks = {"Bola de fuego", "Golpe de baston"};
         Random random = new Random();
         int R = random.nextInt(attacks.length);
         String attack = attacks[R];
         System.out.println(getName() + ": va a atacar con " + attack);
 
         switch (attack) {
-            case "Fireball":
+            case "Bola de fuego":
                 fireballAttack(target);
                 break;
-            case "Staff hit":
+            case "Golpe de baston":
                 staffHitAttack(target);
                 break;
         }
