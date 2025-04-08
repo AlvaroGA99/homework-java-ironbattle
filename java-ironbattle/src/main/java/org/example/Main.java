@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static Character StartBattle(Attacker a, Attacker b){
+    public static Character startBattle(Attacker a, Attacker b){
         Character winner = null;
         Character aChar = (Character) a;
         Character bChar = (Character) b;
@@ -35,6 +35,45 @@ public class Main {
 
         return winner;
     }
+
+    public static Warrior initWarrior(Scanner scanner){
+        System.out.println("Introduce el nombre del Guerrero");
+        String name = scanner.next();
+        System.out.println("Introduce la vida del Guerrero");
+        int hp = readAttribute(scanner);
+        System.out.println("Introduce la stamina del Guerrero");
+        int stamina = readAttribute(scanner);
+        System.out.println("Introduce la fuerza del Guerrero");
+        int strength = readAttribute(scanner);
+        return new Warrior(name, hp, stamina, strength);
+    }
+
+    public static Wizard initWizard(Scanner scanner){
+        System.out.println("Introduce el nombre del Mago");
+        String name = scanner.next();
+        System.out.println("Introduce la vida del Mago");
+        int hp = readAttribute(scanner);
+        System.out.println("Introduce el mana del Mago");
+        int mana = readAttribute(scanner);;
+        System.out.println("Introduce la inteligencia del Guerrero");
+        int intelligence = readAttribute(scanner);;
+        return new Wizard(name, hp, mana, intelligence);
+    }
+
+    public static int readAttribute(Scanner scanner){
+        int attribute = 0;
+        while(true) {
+            if(scanner.hasNextInt()) {
+                attribute = scanner.nextInt();
+                break;
+            }else{
+                System.out.println("Debes introducir un número");
+                scanner.next();
+            }
+        }
+        return attribute;
+    }
+
 
     public static void main(String[] args) {
 
@@ -72,27 +111,11 @@ public class Main {
                                     System.out.println("2 - Mago");
                                     switch (scanner.nextInt()) {
                                         case 1:
-                                            System.out.println("Introduce el nombre del Guerrero");
-                                            String name = scanner.next();
-                                            System.out.println("Introduce la vida del Guerrero");
-                                            int hp = scanner.nextInt();
-                                            System.out.println("Introduce la stamina del Guerrero");
-                                            int stamina = scanner.nextInt();
-                                            System.out.println("Introduce la fuerza del Guerrero");
-                                            int strength = scanner.nextInt();
-                                            a = new Warrior(name, hp, stamina, strength);
+                                            a = initWarrior(scanner);
                                             validOption = true;
                                             break;
                                         case 2:
-                                            System.out.println("Introduce el nombre del Mago");
-                                            String name2 = scanner.next();
-                                            System.out.println("Introduce la vida del Mago");
-                                            int hp2 = scanner.nextInt();
-                                            System.out.println("Introduce el mana del Mago");
-                                            int mana = scanner.nextInt();
-                                            System.out.println("Introduce la inteligencia del Mago");
-                                            int intelligence = scanner.nextInt();
-                                            a = new Wizard(name2, hp2, mana, intelligence);
+                                            a = initWizard(scanner);
                                             validOption = true;
                                             break;
                                         default:
@@ -109,27 +132,11 @@ public class Main {
                                     System.out.println("2 - Mago");
                                     switch (scanner.nextInt()) {
                                         case 1:
-                                            System.out.println("Introduce el nombre del Guerrero");
-                                            String name3 = scanner.next();
-                                            System.out.println("Introduce la vida del Guerrero");
-                                            int hp3 = scanner.nextInt();
-                                            System.out.println("Introduce la stamina del Guerrero");
-                                            int stamina2 = scanner.nextInt();
-                                            System.out.println("Introduce la fuerza del Guerrero");
-                                            int strength2 = scanner.nextInt();
-                                            b = new Warrior(name3, hp3, stamina2, strength2);
+                                            b = initWarrior(scanner);
                                             validOption = true;
                                             break;
                                         case 2:
-                                            System.out.println("Introduce el nombre del Mago");
-                                            String name4 = scanner.next();
-                                            System.out.println("Introduce la vida del Mago");
-                                            int hp4 = scanner.nextInt();
-                                            System.out.println("Introduce el mana del Mago");
-                                            int mana2 = scanner.nextInt();
-                                            System.out.println("Introduce la inteligencia del Mago");
-                                            int intelligence2 = scanner.nextInt();
-                                            b = new Wizard(name4, hp4, mana2, intelligence2);
+                                            b = initWizard(scanner);
                                             validOption = true;
                                             break;
                                         default:
@@ -137,7 +144,7 @@ public class Main {
                                     }
                                 }
 
-                                Character winner = StartBattle(a,b);
+                                Character winner = startBattle(a,b);
                                 System.out.println("El ganador es: " + winner.getName());
                                 break;
                             case 2:
