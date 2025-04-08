@@ -6,8 +6,8 @@ public class Wizard extends Character implements Attacker {
     private int mana;
     private int intelligence;
 
-    public Wizard(String name, int hp) {
-        super(name, hp);
+    public Wizard(String name) {
+        super(name, (int) (Math.random() * (101 - 50)) + 50);
         setMana((int) (Math.random() * (51 - 10)) + 10);
         setIntelligence((int) (Math.random() * (51 - 1)) + 1);
     }
