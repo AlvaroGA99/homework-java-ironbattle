@@ -15,19 +15,19 @@ public class Wizard extends Character implements Attacker {
     public Wizard(String name, int hp, int mana, int intelligence) {
         super(name, hp);
         if (hp < 50 || hp > 100) {
-            System.out.println("Error la vida está fuera de rango: 50 - 100");
+            System.out.println("Error la vida está fuera de rango: 50 - 100, recibirá 50");
             setHp(50);
         } else {
             setHp(hp);
         }
         if (mana < 1 || mana > 50) {
-            System.out.println("Error mana fuera de rango: 1 - 50");
+            System.out.println("Error mana fuera de rango: 1 - 50, recibirá 25");
             setMana(25);
         } else {
             setMana(mana);
         }
         if (intelligence < 1 || intelligence > 10) {
-            System.out.println("Error inteligencia fuera de rango: 1 - 10");
+            System.out.println("Error inteligencia fuera de rango: 1 - 10, recibirá 5");
             setIntelligence(5);
         } else {
             setIntelligence(intelligence);
@@ -69,7 +69,6 @@ public class Wizard extends Character implements Attacker {
 
         if (target.getHp() <= 0) {
             target.setAlive(false);
-            System.out.println(target.getName() + " ha muerto");
         }
     }
 
@@ -81,6 +80,8 @@ public class Wizard extends Character implements Attacker {
         } else {
             target.setHp(target.getHp() - this.intelligence);
             setMana(getMana() - 5);
+            System.out.println(getName() + " hace " + this.intelligence + " puntos de daño a " + target.getName() +
+                    ". A " + target.getName() + " le quedan " + target.getHp() + " puntos de HP.");
         }
     }
 
@@ -88,9 +89,13 @@ public class Wizard extends Character implements Attacker {
         System.out.println("Lanzando ataque de bastón");
         if (this.mana <= 0) {
             setMana(getMana() + 2);
+            System.out.println(getName() + " recupera " + 2 + " puntos de mana. " + target.getName() +
+                    ". A " + target.getName() + " le quedan " + target.getHp() + " puntos de HP.");
         } else {
             target.setHp(target.getHp() - 2);
             setMana(getMana() + 1);
+            System.out.println(getName() + " hace " + 2 + " puntos de daño a " + target.getName() +
+                    " y recupera 1 de mana. A " + target.getName() + " le quedan " + target.getHp() + " puntos de HP.");
         }
     }
 }
