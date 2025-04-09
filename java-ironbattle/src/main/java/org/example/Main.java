@@ -12,8 +12,12 @@ public class Main {
         Character bChar = (Character) b;
         int originalHpA = aChar.getHp();
         int originalHpB = bChar.getHp();
+
+        System.out.println("El combate entre " + aChar.getName() + " (" + aChar.getClass().getName() + ")" + " y " + bChar.getName() + " (" + bChar.getClass().getName() + ")"+ " ha comenzado\n");
         boolean fighting = true;
+        int counter = 1;
         while (fighting) {
+            System.out.println("Ronda " + counter + "\n");
             a.attack(aChar);
             b.attack(bChar);
             if(!aChar.isAlive() && !bChar.isAlive()){
@@ -22,16 +26,21 @@ public class Main {
                 bChar.setAlive(true);
                 bChar.setHp(originalHpB);
                 System.out.println("Ambos personajes han muerto, se reinicia la batalla hasta encontrar un ganador");
+                counter = 1;
                 continue;
             }else{
                 if(!aChar.isAlive()){
                     winner = bChar;
+                    System.out.println(aChar.getName() + " ha muerto en batalla");
                     fighting = false;
                 }else if(!bChar.isAlive()){
                     winner = aChar;
+                    System.out.println(bChar.getName() + " ha muerto en batalla");
                     fighting = false;
                 }
             }
+            System.out.println("\n");
+            counter++;
         }
 
         return winner;
@@ -82,6 +91,9 @@ public class Main {
         // salir
         boolean executing = true;
         boolean validOption = false;
+
+        CharacterCSVReader reader = new CharacterCSVReader("java-ironbattle/src/main/resources/characters.csv");
+
         var scanner = new Scanner(System.in);
 
 
@@ -146,7 +158,7 @@ public class Main {
                                 }
 
                                 Character winner = startBattle(a,b);
-                                System.out.println("El ganador es: " + winner.getName());
+                                System.out.println("\nEl ganador es: " + winner.getName()+ "\n");
                                 break;
                             case 2:
                                 Random random = new Random();
@@ -167,10 +179,17 @@ public class Main {
                                     attacker2.setName(attacker2.getName()+attacker2.getId());
                                 }
                                 Character winnerrandom = startBattle((Attacker) attacker1,(Attacker) attacker2);
-                                System.out.println("El ganador es: " + winnerrandom.getName());
+                                System.out.println("\nEl ganador es: " + winnerrandom.getName() + "\n");
                                 validOption = true;
                                 break;
                             case 3:
+                                Attacker attackera = null;
+                                Attacker attackerb = null;
+                                Attacker[] characters = reader.getRandomCharacters();
+                                attackera = characters[0];
+                                attackerb = characters[1];
+                                Character winnercsv = startBattle((Attacker) attackera,(Attacker) attackerb);
+                                System.out.println("\nEl ganador es: " + winnercsv.getName()+ "\n");
                                 validOption = true;
                                 break;
                             default:
